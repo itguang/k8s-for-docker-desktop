@@ -1,0 +1,23 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: myapp-rc # ReplicationController 的名字
+spec:
+  replicas: 3
+  selector:
+    app: myapp-labe # 选择一个标签
+  template:
+    metadata:
+      labels:
+        app: myapp-labe # 标签选择器所使用的标签
+        env: test
+    spec:
+      containers:
+        - name: myapp
+          image: itguang/myapp
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: m-image-name
+
+

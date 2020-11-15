@@ -1,0 +1,22 @@
+apiVersion: apps/v1 # ReplicaSet 的 apiVersion
+kind: ReplicaSet
+metadata:
+  name: myapp-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp-rs
+  template:
+    metadata:
+      labels:
+        app: myapp-rs
+        env: prod
+    spec:
+      containers:
+        - name: myapp
+          image: itguang/myapp
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+

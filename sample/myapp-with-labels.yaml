@@ -1,9 +1,11 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: myapp # Pod 启动时的主机名
+  name: myapp-with-labels # Pod 启动时的主机名
   labels:
     app: myapp-labels
+    env: test
+    creation-method: manual
 spec:
   containers:
     - name: myapp
