@@ -3,8 +3,13 @@ kind: Service
 metadata:
   name: myapp-svc # 创建一个 name 为 myapp-svc 的服务
 spec:
-  ports:
-    - port: 80 # 服务在 80 端口接收请求,并路由到标签选择器为 app=myapp-rs 的 Pod 的 8080 上
+  sessionAffinity: ClientIP # 会话亲和性, ClientIP:  一个客户端每次请求都访问同一个 Pod
+  ports: # Service 多端口设置
+    - name: http
+      port: 80 # 服务在 80 端口接收请求,并路由到标签选择器为 app=myapp-rs 的 Pod 的 8080 上
+      targetPort: 8080
+    - name: https
+      port: 443
       targetPort: 8080
   selector:
-    app: myapp-rs
+    app: myapp-rs # Service 通过选择器选择一组 Pod 作为一个服务

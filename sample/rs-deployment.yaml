@@ -1,0 +1,34 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: myapp-v2-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp-v2
+  template:
+    metadata:
+      name: myapp-v2-pod
+      labels:
+        app: myapp-v2
+    spec:
+      containers:
+        - name: myapp
+          image: itguang/myapp:v2 # ReplicaSet 创建的 Pod
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-v2-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: myapp-v2 # 创建一个 Service 指向所有指定标签的 Pod
+  ports:
+    - port: 80
+      targetPort: 8080
+
