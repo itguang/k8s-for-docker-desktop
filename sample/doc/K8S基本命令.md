@@ -111,4 +111,12 @@ kubectl logs <pod name>
 ```
 
 
+## 命令别名
+
+在本机的配置文件中: ~/.ashrc 添加如下别名配置
+
+```shell script
+alias k=kubectl
+alias kns=kubens
+```
 

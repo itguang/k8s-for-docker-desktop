@@ -19,3 +19,43 @@ kubectl get ns
 ```
 kubectl create -f myapp.yaml -n custom-namespace
 ```
+
+## 切换 namespace
+
+安装 kubens 命令
+
+```shell script
+ git clone https://github.com/ahmetb/kubectx.git
+ cp kubectx/kube* /usr/local/bin/
+```
+
+* 列出所有 namespace
+
+```shell script
+  ● ● ● λ kubens
+default
+kube-node-lease
+kube-public
+kube-system
+kubernetes-dashboard
+
+```
+* 切换
+
+```shell script
+ ● ● ● λ kubens kube-system
+Context "docker-desktop" modified.
+Active namespace is "kube-system".
+
+```
+
+
+## 命令别名
+
+在本机的配置文件中: ~/.ashrc 添加如下别名配置
+
+```shell script
+alias k=kubectl
+alias kns=kubens
+```
+之后就可以使用 kns 命令了
