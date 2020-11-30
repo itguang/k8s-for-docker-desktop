@@ -1,0 +1,47 @@
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia-svc
+spec:
+  clusterIP: None
+  selector:
+    app: kubia
+  ports:
+    - port: 80
+      name: http
+---
+# StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kubia
+spec:
+  serviceName: kubia-svc # 绑定到一个 Service
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: kubia # statefulSet 创建的 Pod 带有 app:kubia 标签
+    spec:
+      containers:
+        - name: kubia
+          image: luksa/kubia-pet
+          ports:
+            - containerPort: 8080
+              name: http
+          volumeMounts:
+            - mountPath: /var/data #
+              name: data
+  volumeClaimTemplates: # 通过持久卷模板创建持久卷声明
+    - metadata:
+        name: data
+      spec:
+        resources:
+          requests:
+            storage: 1Gi
+        accessModes:
+          - ReadWriteOnce
+  selector:
+    matchLabels:
+      app: kubia

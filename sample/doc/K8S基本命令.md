@@ -104,6 +104,7 @@ kubectl delete all --all
 ```
 kubectl logs <pod name>
 ```
+## 调试 - 把本机端口转发到内部的Pod网络
 
 * 本地调试时,把本机端口转发到 Pod 端口
 ```

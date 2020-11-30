@@ -60,21 +60,21 @@ replicationcontroller "kubia-v1" rolling updated "kubia- v2"
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment
+  name: myapp-deployment # Deployment 的名称
 spec:
   replicas: 3
   template:
     metadata:
       name: myapp
       labels:
-        app: myapp
+        app: myapp  # 标签选择器
     spec:
       containers:
         - name: nodejs
           image: itguang/myapp
   selector:
     matchLabels:
-      app: myapp
+      app: myapp # Pod 标签
 ```
 
 > Deployment 也是由标签选择器,期望副本数,和 Pod 模板组成的,其中 Pod 是通过 内部自动创建的一个 ReplicaSet

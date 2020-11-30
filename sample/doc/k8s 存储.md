@@ -31,3 +31,12 @@ spec:
               values:
                 - docker-desktop
 ```
+
+## 创建 Pod 通过 PVC 使用 PV
+
+## 调试 - 把本机端口转发到内部的Pod网络
+
+* 本地调试时,把本机端口转发到 Pod 端口
+```
+ k port-forward myapp 8888:8080 # 把本机 8888 转发到 Pod 的 8080 端口
+```
